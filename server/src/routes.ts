@@ -1,11 +1,19 @@
 import { Request, Response, Router } from 'express';
 
+import { 
+    createProduct, 
+    listAllProduct, 
+    listProductById,
+    deleteProduct, 
+    updateProduct 
+} from './controllers/ProductController';
+
 const routes = Router();
 
-routes.get("/products", (request: Request, response: Response) => {
-    console.log('Entrou!!');
-
-    response.send('Okkk!');
-})
+routes.post("/products", createProduct);
+routes.get("/products", listAllProduct);
+routes.get("/products/:id", listProductById);
+routes.patch("/products/:id", updateProduct);
+routes.delete("/products/:id", deleteProduct);
 
 export default routes;
