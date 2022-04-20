@@ -12,7 +12,12 @@ const QueryCreateProduct = (description: string, price: number) => {
 }
 
 const QueryListProducts = () => {
-    return prisma.product.findMany();
+    return prisma.product.findMany({
+        select: {
+            id: true,
+            description: true
+        }
+    });
 }
 
 const QueryListProductById = (id: string) => {

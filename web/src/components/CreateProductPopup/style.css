@@ -1,0 +1,101 @@
+.popup,
+.popup .overlay{
+    width: 100vw;
+    height: 100vh;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+}
+
+.popup .overlay {
+    background-color: var(--overlay);
+}
+
+.popup .popup-content-container {
+    width: 30%;
+    height: 40%;
+    min-width: 400px;
+    min-height: 360px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background-color: #f1f1f1;
+    padding: 20px 30px;
+    border-radius: 14px;
+    border: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup .popup-content-container .product-form {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0 2rem;
+
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup .popup-content-container .product-form .product-form-inputs {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.popup .popup-content-container .product-form .product-form-inputs label {
+    margin-left: .4rem;
+}
+
+.popup .popup-content-container .product-form .product-form-inputs input,
+.popup .popup-content-container .product-form .product-form-inputs textarea {
+    height: 2rem;
+    padding: .4rem 1rem;
+    margin-top: .2rem;
+
+    border: 1px solid #aaa;
+    border-radius: .6rem;
+}
+
+.popup .popup-content-container .product-form .product-form-inputs textarea {
+    height: 5rem;
+    resize: none;
+    font-family: Archivo;
+}
+
+.popup .popup-content-container .product-form .product-form-inputs input:focus,
+.popup .popup-content-container .product-form .product-form-inputs textarea:focus {
+    outline: 0;
+}
+
+.popup .popup-content-container .product-form button {
+    outline: 0;
+    border: 0;
+
+    width: 100%;
+    margin-top: 1.6rem;
+    height: 3rem;
+
+    font-size: 1.2rem;
+
+    background-color: var(--button-add-color);
+
+    border: 1px solid #aaa;
+    border-radius: .6rem;
+
+    cursor: pointer;
+}
+
+.popup .popup-content-container .product-form button:hover {
+    background-color: var(--button-add-color-hover);
+}

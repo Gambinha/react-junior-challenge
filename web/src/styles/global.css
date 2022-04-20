@@ -1,0 +1,28 @@
+:root {
+    font-size: 16px;
+    font-family: Archivo;
+
+    --menubar-color: #656565;
+    --background-color: rgb(244, 238, 238);
+    --button-color: rgb(229, 223, 223);
+    --button-color-hover: rgb(223, 217, 217);
+    --button-add-color: rgb(216, 237, 204);
+    --button-add-color-hover: rgb(205, 231, 189);
+    --overlay: rgba(49, 49, 49, 0.8);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body, #root{
+    height: 100vh;
+}
+
+body{
+    background-color: var(--background-color);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
