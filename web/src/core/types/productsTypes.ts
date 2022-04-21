@@ -8,7 +8,7 @@ type ProductsDetailsProps = {
     id: number;
     description: string;
     price: number;
-    created_at: Date;
+    createdAt: string;
 }
 
 export type { ProductsCatalogProps, ProductsDetailsProps };

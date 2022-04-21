@@ -1,6 +1,6 @@
 .product-page {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 
     display: flex;
     flex-direction: column;
@@ -25,4 +25,93 @@
     
     display: flex;
     justify-content: center;
+    position: relative;
+}
+
+.product-page .product-content .content-head a .go-home-button {
+    position: absolute;
+    font-size: 2rem;
+    color: black;
+    left: 0;
+
+    cursor: pointer;
+}
+
+.product-page .product-content .content-head a .go-home-button:hover {
+    color: rgb(109, 109, 205);
+}
+
+.product-page .product-content .product-informations {
+    width: 80%;
+    margin-top: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-page .product-content .product-informations .main-informations {
+    width: 100%;
+
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product-page .product-content .product-informations .main-informations .product-id {
+    flex: 2;
+    text-align: left;
+}
+
+.product-page .product-content .product-informations .main-informations .product-description {
+    flex: 8;
+    text-align: center;
+
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.product-page .product-content .product-informations .main-informations .product-price {
+    font-size: 1.2rem;
+    text-align: right;
+    color: red;
+    flex: 2;
+}
+
+.product-page .product-content .product-informations .product-date {
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    text-align: right;
+}
+
+.product-page .product-content .product-informations .products-buttons {
+    width: 60%;
+    min-width: 26rem;
+    margin-top: 10rem;
+
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.product-page .product-content .product-informations .products-buttons button {
+    outline: 0;
+    border: 0;
+
+    border: 1px solid #aaa;
+    border-radius: .6rem;
+    background-color: var(--button-color);
+
+    width: 20rem;
+    height: 2rem;
+
+    cursor: pointer;
+}
+
+.product-page .product-content .product-informations .products-buttons button:hover {
+    background-color: var(--button-color-hover);
 }

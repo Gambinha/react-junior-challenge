@@ -1,46 +1,47 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
 import { ProductsCatalogProps } from '../../core/types/productsTypes';
-import { ResponseProps } from '../../core/types/responseTypes';
 
 import { api } from "../../core/services/api";
+import { useQueryClient } from 'react-query';
 
 import './style.css';
 
 import Product from '../Product';
-import CreateProductPopup from '../CreateProductPopup';
+import Popup from '../Popup';
 
 const ProductsList = () => {
-    const [products, setProducts] = useState<ProductsCatalogProps[]>([]);
-
     const [showCreateProductPopup, setShowCreateProductPopup] = useState<boolean>(false);
 
-    const [errorWhenGettingProducts, setErrorWhenGettingProducts] = useState<boolean>(false);
-    const [loadingWhenGettingProducts, setLoagingWhenGettingProducts] = useState<boolean>(false);
+    const [description, setDescription] = useState<string>("");
+    const [price, setPrice] = useState<number>(0);
 
-    useEffect(() => {
-        fetchApiToGetAllProducts();
-    }, [])
- 
-    const fetchApiToGetAllProducts = () => {
-        setLoagingWhenGettingProducts(true);
+    const queryClient = useQueryClient();
 
-        api.get("/products")
-            .then((response) => {
-                const data: ResponseProps = response.data;
-                const productsList = data.data;
-
-                setProducts(productsList);
-                setErrorWhenGettingProducts(false);
-            })
-            .catch((error) => {
+    const fetchApiToAddNewProduct = () => {
+        if ( (description.length === 0) || (price < 1) ) {
+            if(description.length === 0) alert("Por favor, descreva o produto corretamente!");
+            else if(price < 1) alert("Por favor, insira o preço do produto corretamente!");
+        } else {
+            api.post("/products", {
+                description: description,
+                price: price
+            }).then(async (response) => {
+                await queryClient.invalidateQueries(["PRODUCTS"])
+                setShowCreateProductPopup(false);
+            }).catch(error => {
                 console.log(error);
 
-                setErrorWhenGettingProducts(true);
+                alert("Erro no Servidor! Tente novamente.")
             })
-            .finally(() => {
-                setLoagingWhenGettingProducts(false);
-            })
+        }
     }
+
+    const { data: products, isFetching, isError } = useQuery<ProductsCatalogProps[]>('PRODUCTS', async () => {
+        const response = await api.get("/products");
+
+        return response.data.data;
+    })
 
     return (
         <div className="products-container">
@@ -48,21 +49,21 @@ const ProductsList = () => {
                 + Adicionar Produto
             </button>
 
-            {   loadingWhenGettingProducts ?
+            {   isFetching ?
 
                 <span>Buscando Produtos...</span>
 
                 :
             
-                errorWhenGettingProducts ? 
+                isError ? 
 
                 <span>Erro no Servidor! Tente reiniciar a página.</span>
             
                 :
 
-                products.length > 0 ? 
+                products?.length || -1 > 0 ? 
 
-                products.map((product) => {
+                products?.map((product) => {
                     return (
                         <Product id={product.id} description={product.description} key={product.id} />
                     );
@@ -74,7 +75,38 @@ const ProductsList = () => {
 
             }
 
-            <CreateProductPopup trigger={showCreateProductPopup} setTrigger={setShowCreateProductPopup} reloadProductsList={fetchApiToGetAllProducts} />
+            <Popup trigger={showCreateProductPopup} setTrigger={setShowCreateProductPopup} >
+                <>
+                    <h2>Adicionar Produto</h2>
+
+                    <div className="product-form">
+                        <div className="product-form-inputs">
+                            <label htmlFor="description" >Descrição (200):</label>
+                            <textarea 
+                                placeholder="Descreva o produto..." 
+                                name="description" 
+                                maxLength={200}
+                                onChange={(e) => setDescription(e.target.value)} 
+                            />
+                        </div>
+
+                        <div className="product-form-inputs">
+                            <label htmlFor="price">Preço (R$):</label>
+                            <input 
+                                placeholder="Preço do Produto (Min. 1)..." 
+                                type="number" 
+                                name="price"
+                                min={1} 
+                                onChange={(e) => setPrice(Number(e.target.value))} 
+                            />
+                        </div>
+
+                        <button onClick={ fetchApiToAddNewProduct } >
+                            + Adicionar
+                        </button>
+                    </div>    
+                </>
+            </Popup>
         </div>
     );
 }

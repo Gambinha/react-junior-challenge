@@ -72,7 +72,7 @@ const listProductById = async (request: Request, response: Response) => {
 
     const product = await QueryListProductById(id);
 
-    if(!product) return response.status(ERROR_BAD_REQUEST).json({ success: false, error: ERROR_PRODUCT_NOT_FOUND, data: null });
+    if(!product) return response.status(SUCCESS).json({ success: true, error: ERROR_PRODUCT_NOT_FOUND, data: null });
     return response.status(SUCCESS).json({ success: true, message: SUCCESS_LISTED_PRODUCT, data: product });
 }
 
@@ -85,7 +85,7 @@ const updateProduct = async (request: Request, response: Response) => {
 
     // test if product exists
     const product = await QueryListProductById(id);
-    if(!product) return response.status(ERROR_BAD_REQUEST).json({ success: false, error: ERROR_PRODUCT_NOT_FOUND, data: null });
+    if(!product) return response.status(SUCCESS).json({ success: true, error: ERROR_PRODUCT_NOT_FOUND, data: null });
     
     const updatedProduct = QueryUpdateProductById(id, description, price);
 
@@ -103,7 +103,7 @@ const deleteProduct = async (request: Request, response: Response) => {
 
     // test if product exists
     const product = await QueryListProductById(id);
-    if(!product) return response.status(ERROR_BAD_REQUEST).json({ success: false, error: ERROR_PRODUCT_NOT_FOUND, data: null });
+    if(!product) return response.status(SUCCESS).json({ success: true, error: ERROR_PRODUCT_NOT_FOUND, data: null });
 
     const deletedProduct = QueryDeleteProductById(id);
 

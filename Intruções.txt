@@ -1,0 +1,14 @@
+Para conexão e criação do banco de dados foi utilizado o ORM Prisma.
+
+Passos para criar o banco e as tabelas:
+    1. Criar o banco em POSTGRES manualmente;
+    2. Criar um arquivo .ENV na pasta "./server/" ou na pasta "./server/prisma/" com a seguinte variável:
+        [DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA"] => Modelo padrão
+        [DATABASE_URL="postgresql://postgres:PASSWORD@localhost:5432/mini-ecommerce?schema=public"] => Como ficou a minha variável (ocultei a senha)
+        - Basta substituir as informações;
+    3. Instalar as dependências com: [npm install] (já instala o Prisma)
+    4. Rodar o seguinte comando: [npx prisma migrate dev --name init]
+    5. A tabela já está criada e a API pronta para uso.
+
+Para rodar o server: [npm run dev] [yarn run dev] => http://localhost:3333/
+Para rodar o front: [npm start] [yarn start] => http://localhost:3000/

@@ -1,6 +1,6 @@
 .catalog-page {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@
 }
 
 .catalog-page .catalog-content .content-head {
-    width: 70%;
+    width: 80%;
     padding: .6rem;
 
     border-bottom: 3px solid black;
