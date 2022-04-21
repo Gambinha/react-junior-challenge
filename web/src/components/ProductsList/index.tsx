@@ -63,7 +63,9 @@ const ProductsList = () => {
 
                 products?.length || -1 > 0 ? 
 
-                products?.map((product) => {
+                products?.sort((a, b) => {
+                    return a.id > b.id ? 1 : -1;
+                }).map((product) => {
                     return (
                         <Product id={product.id} description={product.description} key={product.id} />
                     );
