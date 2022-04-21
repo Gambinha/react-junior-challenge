@@ -24,8 +24,10 @@ const Produto = () => {
         const response = await api.get(`/products/${id}`);
         const data = response.data.data;
 
-        setEditedDescription(data.description);
-        setEditedPrice(data.price);
+        if(data != null) {
+            setEditedDescription(data.description);
+            setEditedPrice(data.price);
+        }
 
         return data;
     })
